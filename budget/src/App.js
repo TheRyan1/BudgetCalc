@@ -1,10 +1,10 @@
 import './Components/Expenses'
-import Home from './Components/HomePage'
+import Login from './Components/Login'
 import './App.css';
 
 function App() {
   return (
-  <Home />
+  <Login />
   );
 }
 

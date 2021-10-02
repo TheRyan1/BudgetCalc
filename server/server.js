@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const app = express();
 const User = require('./Mongo/schema')
 require('dotenv').config()
+const bcrypt = require('bcrypt');
 
 const connectDB = async ()=>{
 try{
@@ -14,7 +15,7 @@ catch(err){
 }
    
 }
-connectDB();
+//connectDB();
 
 const port = 5000;
 
@@ -23,16 +24,36 @@ app.listen(port,()=>{
 });
 
 
+app.get('/login/',(req,res)=>{
+    const checkUserLogin = (password)=> {
+     
+        // input password to be hashed
+        const checker = () =>{
+            bcrypt.hash("123",5,(err,hash)=>{
+                //log the encrypted password
+                console.log('Your encrypted password is: ' + hash)
+                //test that the inputted password is correct
+                bcrypt.compare(password,hash,(err,result)=>{
+              return result
+            
+                })
+            })  
+        }
 
-app.post('/',(req,res)=>{
+    }
+console.log(checkUserLogin(123))
+
+})
+
+app.post('/:username/:password',(req,res)=>{
 
 const addUser =  ()=>{
     const newUser = new User({
-        username: "Ryan",
-        password: "123",
-        salary: 17000,
-        rent: 4000,
-        food: [{name:"groceries",cost:22}],
+        username: "",
+        password: "",
+        salary: 0,
+        rent: 0,
+        food: [],
         travel: [],
         extra: []
     })
