@@ -2,10 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const User = require('./Mongo/schema')
+require('dotenv').config()
 
 const connectDB = async ()=>{
 try{
-    await mongoose.connect('mongodb+srv://ryan123:ryan123@cluster0.lcwid.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(process.env.MONGO_URI,{ useNewUrlParser: true, useUnifiedTopology: true });
     console.log("connected")
 }
 catch(err){
